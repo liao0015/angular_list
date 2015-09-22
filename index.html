@@ -1,0 +1,38 @@
+<!doctype html>
+<html ng-app="nameApp">
+<head>
+<meta charset="UTF-8">
+<title>My list</title>
+<script src="angular.min.js"></script>
+<script>
+	var nameApp = angular.module("nameApp", []);
+	nameApp.controller("NameCtrl", function($scope){
+		$scope.names=["A", "B", "C"];
+		
+		$scope.addName = function(){
+			$scope.names.push($scope.enteredName);
+			$scope.enteredName = "";
+		};
+		
+		$scope.removeName = function(name){
+			var i = $scope.names.indexOf(name);
+			$scope.names.splice(i, 1);
+		};
+	});
+</script>
+</head>
+
+<body ng-controller="NameCtrl">
+<h2>This is the header</h2>
+<ul>
+	<li ng-repeat="name in names">{{name}}
+    	<a href="" ng-click="removeName(name)">remove</a>
+    </li>
+</ul>
+<form ng-submit="addName()">
+	<input ng-model="enteredName" type="text"/>
+	<input type="submit" value="add"/>
+</form>
+
+</body>
+</html>
